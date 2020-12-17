@@ -1,28 +1,32 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
+require_relative './lib/diary'
 
 class Diary_app < Sinatra::Base
   enable :sessions
   set :session_secret, 'super secret'
 
-   get '/' do
-     erb :index
-   end
+  get '/' do
+    erb :index
+  end
 
-   get '/add_entry' do
+  get '/add_entry' do
     erb :add_entry
   end
 
-   post '/' do
+  post '/' do
     session[:title] = params[:title]
     session[:body] = params[:body]
     redirect('/show_entry')
-   end
+  end
 
-   get '/show_entry' do
+  get '/show_entry' do
     @diary_title = session[:title]
     @diary_body = session[:body]
+    
     erb :show_entry
-   end
+  end
 
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

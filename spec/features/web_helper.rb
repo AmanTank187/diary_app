@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def add_diary_entry
   visit('/add_entry')
   fill_in(:title, with: 'Title test')
