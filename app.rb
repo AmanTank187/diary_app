@@ -13,12 +13,14 @@ class Diary_app < Sinatra::Base
   end
 
    post '/' do
+    session[:title] = params[:title]
     session[:body] = params[:body]
     redirect('/show_entry')
    end
 
    get '/show_entry' do
-    @diary_entry = session[:body]
+    @diary_title = session[:title]
+    @diary_body = session[:body]
     erb :show_entry
    end
 
